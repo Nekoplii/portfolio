@@ -1,0 +1,107 @@
+---
+// ProcessSection.astro - Step Project Development
+const steps = [
+  {
+    step: '01',
+    phase: 'Discovery & Architecture',
+    timeline: 'Week 1',
+    description: 'Deep dive into product goals, user personas, performance requirements, and technical constraints to establish a bulletproof architectural foundation.',
+    deliverables: ['Tech Stack Audit', 'System Architecture Diagram', 'Performance Budget', 'Timeline Roadmapping']
+  },
+  {
+    step: '02',
+    phase: 'Wireframing & UX Prototype',
+    timeline: 'Week 1-2',
+    description: 'Crafting responsive wireframes and interactive user journeys. Validating data hierarchy and component structures before entering visual design.',
+    deliverables: ['Low-Fi Flowcharts', 'Component Mapping', 'Information Architecture', 'User Journey Maps']
+  },
+  {
+    step: '03',
+    phase: 'Visual & System Design',
+    timeline: 'Week 2-3',
+    description: 'Establishing comprehensive design systems: custom color tokens (#ff8600 accent), typography hierarchies, glassmorphic card formulas, and micro-interactions.',
+    deliverables: ['Figma Design Tokens', 'Glassmorphism Styleguide', 'Interactive Component Library', 'Motion Specifications']
+  },
+  {
+    step: '04',
+    phase: 'Engineering & 3D WebGL',
+    timeline: 'Week 3-5',
+    description: 'Writing strict, accessible, high-performance code in Astro, TailwindCSS, React, and Three.js. Implementing smooth scroll projection shaders and responsive layouts.',
+    deliverables: ['Clean Modular Codebase', 'Hardware-Accelerated Canvas/WebGL', 'Interactive Components', 'Continuous Integration']
+  },
+  {
+    step: '05',
+    phase: 'Lighthouse QA & Deployment',
+    timeline: 'Week 6',
+    description: 'Rigorous cross-browser QA, Core Web Vitals profiling, sub-second LCP optimization, SEO metadata verification, and global CDN edge deployment.',
+    deliverables: ['100/100 Lighthouse Audit', 'Zero-Downtime Edge Deployment', 'Analytics Telemetry', 'Full Handover Documentation']
+  }
+];
+---
+
+<section id="workflow" class="py-20 sm:py-28 relative -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 border-t border-white/10">
+  <!-- Container Intersection Crosshairs '+' -->
+  <div class="absolute -top-2.5 -left-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
+  <div class="absolute -top-2.5 -right-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
+
+  <div id="process" class="sr-only"></div>
+  <div class="mb-12 sm:mb-16">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ff8600]/10 border border-[#ff8600]/25 text-xs font-mono text-[#ff8600] mb-3">
+      <span>04 // WORKFLOW & LIFECYCLE</span>
+    </div>
+    <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+      Step Project <span class="bg-gradient-to-r from-[#ff8600] to-[#ffa033] bg-clip-text text-transparent">Development</span>
+    </h2>
+    <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-xl">
+      A transparent, systematic process designed to eliminate guesswork and deliver exceptional digital outcomes on time.
+    </p>
+  </div>
+
+  <div class="relative">
+    <!-- Connecting central vertical line on larger screens -->
+    <div class="hidden md:block absolute left-8 top-10 bottom-10 w-0.5 bg-gradient-to-b from-[#ff8600] via-[#ff8600]/30 to-transparent pointer-events-none"></div>
+
+    <div class="space-y-8">
+      {steps.map((item, index) => (
+        <div class="relative flex flex-col md:flex-row items-start gap-6 md:gap-10 group">
+          
+          <!-- Step Number Pill / Node -->
+          <div class="relative z-10 flex-shrink-0 w-16 h-16 rounded-2xl glass-panel border border-[#ff8600]/40 flex flex-col items-center justify-center bg-[#10131d] group-hover:border-[#ff8600] group-hover:shadow-[0_0_15px_rgba(255,134,0,0.3)] transition-all">
+            <span class="text-xs font-mono text-[#ff8600] font-bold">STEP</span>
+            <span class="text-lg font-black text-white font-mono">{item.step}</span>
+          </div>
+
+          <!-- Step Content Card -->
+          <div class="flex-1 glass-card rounded-3xl p-6 sm:p-8 border border-white/10 group-hover:border-[#ff8600]/30 transition-all">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 mb-4 border-b border-white/10">
+              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-[#ff8600] transition-colors">
+                {item.phase}
+              </h3>
+              <span class="text-xs font-mono px-3 py-1 rounded-full bg-white/5 text-slate-300 border border-white/10 w-fit">
+                {item.timeline}
+              </span>
+            </div>
+
+            <p class="text-sm text-slate-300 leading-relaxed mb-6">
+              {item.description}
+            </p>
+
+            <!-- Deliverables Pills -->
+            <div>
+              <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-3">Key Milestones & Deliverables:</p>
+              <div class="flex flex-wrap gap-2">
+                {item.deliverables.map((deliv) => (
+                  <span class="text-xs font-mono px-3 py-1 rounded-lg bg-[#ff8600]/10 text-slate-200 border border-[#ff8600]/20 flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#ff8600]"></span>
+                    {deliv}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

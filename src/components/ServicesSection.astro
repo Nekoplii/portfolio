@@ -1,0 +1,100 @@
+---
+// ServicesSection.astro - Target for sidebar item "Services" (#services)
+import { ArrowRight } from 'lucide-astro';
+
+const services = [
+  {
+    number: '01',
+    title: 'High-Performance Web Architecture',
+    subtitle: 'Astro, React & Modern Edge Systems',
+    description: 'Transforming complex product roadmaps into blazing fast, SEO-optimized web applications with modern island architecture and zero JavaScript overhead.',
+    deliverables: ['Custom Astro & React Applications', 'Edge SSR & Dynamic Routing', 'Database Modeling & Supabase/PostgreSQL API', 'Micro-Frontend Modular Systems'],
+    accent: '#ff8600'
+  },
+  {
+    number: '02',
+    title: 'Interactive 3D WebGL & Creative Motion',
+    subtitle: 'Three.js, GLSL Shaders & Canvas',
+    description: 'Bespoke 3D product visualizers, interactive global mapping grids, morphing particle systems, and award-winning creative digital experiences running at 60-120 FPS.',
+    deliverables: ['3D WebGL Globe & Geometry Morphing', 'Custom Vertex & Fragment Shaders', 'Interactive Hardware-Accelerated Canvas', 'Fluid Scroll-Driven Choreography'],
+    accent: '#ffa033'
+  },
+  {
+    number: '03',
+    title: 'Design Systems & UI/UX Engineering',
+    subtitle: 'Glassmorphism, TailwindCSS & Tokens',
+    description: 'Crafting pixel-perfect design systems with unified design tokens, dark neutral palettes, subtle glassmorphic lighting, and accessible micro-interactions.',
+    deliverables: ['TailwindCSS v4 Custom Themes', 'Glassmorphism Component Library', 'Cross-Device Responsive Guidelines', 'Figma to Code Zero-Loss Bridge'],
+    accent: '#ff8600'
+  },
+  {
+    number: '04',
+    title: 'Core Web Vitals & Performance Optimization',
+    subtitle: 'Lighthouse 100/100 & Sub-second LCP',
+    description: 'Comprehensive performance engineering to guarantee your web applications rank #1 on search engines, load instantaneously, and keep bounce rates at absolute zero.',
+    deliverables: ['Sub-second Largest Contentful Paint (LCP)', 'Asset Compression & Font Tuning', 'Edge Caching & Cloudflare CDN Setup', 'Accessibility (a11y) Full Compliance'],
+    accent: '#ffa033'
+  }
+];
+---
+
+<section id="services" class="py-20 sm:py-28 relative -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 border-t border-white/10">
+  <!-- Container Intersection Crosshairs '+' -->
+  <div class="absolute -top-2.5 -left-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
+  <div class="absolute -top-2.5 -right-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
+
+  <div class="mb-12 sm:mb-16">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ff8600]/10 border border-[#ff8600]/25 text-xs font-mono text-[#ff8600] mb-3">
+      <span>05 // SERVICES & EXPERTISE</span>
+    </div>
+    <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+      Engineering <span class="bg-gradient-to-r from-[#ff8600] to-[#ffa033] bg-clip-text text-transparent">Services</span>
+    </h2>
+    <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-xl">
+      Comprehensive technical solutions tailored for startups, product teams, and high-growth digital brands.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {services.map((srv) => (
+      <div class="glass-card rounded-3xl p-6 sm:p-8 border border-white/10 flex flex-col justify-between group hover:border-[#ff8600]/40 transition-all duration-300">
+        <div>
+          <div class="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
+            <span class="text-2xl font-black font-mono text-[#ff8600]">{srv.number}</span>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-white/5 text-slate-300 border border-white/10">
+              Ready for Deployment
+            </span>
+          </div>
+
+          <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-[#ff8600] transition-colors mb-1">
+            {srv.title}
+          </h3>
+          <p class="text-xs font-mono text-[#ff8600] mb-4">{srv.subtitle}</p>
+
+          <p class="text-sm text-slate-300 leading-relaxed mb-6">
+            {srv.description}
+          </p>
+
+          <!-- Deliverables -->
+          <div class="space-y-2 mb-6">
+            <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Scope of Work:</p>
+            {srv.deliverables.map((item) => (
+              <div class="flex items-center gap-2 text-xs text-slate-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#ff8600]"></span>
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <a 
+          href="#contact" 
+          class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-[#ff8600] transition-colors"
+        >
+          <span>Request Scope & Quote</span>
+          <ArrowRight class="w-4 h-4 transition-transform group-hover:translate-x-1" />
+        </a>
+      </div>
+    ))}
+  </div>
+</section>
