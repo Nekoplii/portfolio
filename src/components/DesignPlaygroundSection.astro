@@ -1,0 +1,364 @@
+---
+// DesignPlaygroundSection.astro - 7 Core Design Paradigms with Accurate Live UI Samples
+import { Sparkles, Play, Zap } from 'lucide-astro';
+
+const designStyles = [
+  {
+    id: 'neumorphism',
+    index: '01',
+    title: 'Neumorphism',
+    subtitle: 'Tactile extrusion & debossed dual-light surfaces',
+    description: 'Monochromatic surfaces paired with opposing light and dark soft drop shadows, creating the illusion of elements emerging smoothly from or pressed into the physical plane without sharp border lines.'
+  },
+  {
+    id: 'neobrutalism',
+    index: '02',
+    title: 'Neobrutalism',
+    subtitle: 'High contrast, thick strokes & hard offset pop',
+    description: 'Raw, stark geometric forms defined by heavy 2px black or vibrant borders, unblurred offset drop shadows, solid pop color blocks, and unapologetic typography.'
+  },
+  {
+    id: 'glassmorphism',
+    index: '03',
+    title: 'Glassmorphism',
+    subtitle: 'Optical refraction, frosted glass & specular borders',
+    description: 'Translucent frosted glass planes floating across ambient light sources, utilizing multi-layer backdrop-blur filters, delicate white edge highlights, and luminous depth.'
+  },
+  {
+    id: 'flat',
+    index: '04',
+    title: 'Flat',
+    subtitle: 'Zero distraction & functional 2D minimalism',
+    description: 'Strict two-dimensional planes without shadows, blurs, or gradients. Maximizes readability and information density through pure typographic contrast and solid color blocks.'
+  },
+  {
+    id: 'claymorphism',
+    index: '05',
+    title: 'Claymorphism',
+    subtitle: 'Puffy 3D volume, rounded squircles & tactile bevels',
+    description: 'Playful inflated 3D surfaces characterized by high-radius squircle shapes, paired inner light/dark bevel highlights, and soft floating drop shadows that mimic smooth clay.'
+  },
+  {
+    id: 'gridlines',
+    index: '06',
+    title: 'Gridlines',
+    subtitle: 'Blueprint matrix, orthogonal dividers & spatial ticks',
+    description: 'Transparent structural layout systems with visible orthogonal dividing lines, monospace telemetry indices, coordinate markings, and crosshair (+) intersection points.'
+  },
+  {
+    id: 'bento-grid',
+    index: '07',
+    title: 'Bento Grid',
+    subtitle: 'Asymmetric modular card hierarchy & dense information architecture',
+    description: 'Compartmentalized responsive multi-tile layouts inspired by Japanese bento boxes. Distributes heterogeneous metrics, charts, tools, and actions into harmonious, highly readable tiles with varying aspect ratios.'
+  }
+];
+---
+
+<section id="designs" class="py-20 sm:py-28 relative -mx-4 sm:-mx-6 lg:-mx-8 border-t border-white/10">
+  <!-- Container Intersection Crosshairs '+' aligned with max-w-7xl borders -->
+  <div class="absolute -top-2.5 -left-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
+  <div class="absolute -top-2.5 -right-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
+
+  <!-- Centered Section Header -->
+  <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16 px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl sm:text-5xl font-bold text-white tracking-tight">
+      Design <span class="bg-gradient-to-r from-[#ff8600] to-[#ffa033] bg-clip-text text-transparent">Styles</span>
+    </h2>
+    <p class="text-slate-400 text-sm sm:text-base mt-3">
+      Visual paradigms, structural philosophies, and interaction systems mastered across modern software interfaces.
+    </p>
+  </div>
+
+  <!-- Architectural Grid Line Matrix: Flush to max-w-7xl borders with 100% Solid GPU-Optimized Background -->
+  <div class="relative border-t border-white/10 w-full bg-[#0d0f15] shadow-2xl">
+    
+    <!-- Outer Side Crosshairs '+' at the top of the grid -->
+    <div class="absolute -top-2.5 -left-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
+    <div class="absolute -top-2.5 -right-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
+
+    <!-- 7 Design Styles Grid: 1 col on mobile, 2 cols on tablet, 3 cols on desktop -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full">
+      {designStyles.map((style, idx) => {
+        // Border classes for clean single-pixel lines connecting seamlessly with max-w-7xl
+        const isLastItem = idx === 6; // Bento Grid spans full width
+        
+        // Tablet (2 columns)
+        const isTabletRightEdge = idx % 2 === 1;
+        // Desktop (3 columns)
+        const isDesktopRightEdge = idx % 3 === 2;
+
+        const borderClasses = [
+          'border-b border-white/10',
+          isLastItem 
+            ? 'border-r-0' 
+            : `${isTabletRightEdge ? 'sm:border-r-0' : 'sm:border-r sm:border-white/10'} ${isDesktopRightEdge ? 'lg:border-r-0' : 'lg:border-r lg:border-white/10'}`
+        ].join(' ');
+
+        const colSpanClass = isLastItem ? 'sm:col-span-2 lg:col-span-3' : '';
+
+        return (
+          <article class={`p-6 sm:p-8 flex flex-col justify-between group bg-[#10131e]/70 hover:bg-[#161a29]/95 transition-colors relative ${borderClasses} ${colSpanClass}`} style="contain: layout style paint; transform: translateZ(0);">
+            <div>
+              <!-- Top Header (No Badges) -->
+              <div class="flex items-center justify-between pb-3 mb-4 border-b border-white/10 font-mono text-xs">
+                <span class="text-[#ff8600] font-semibold">{style.index} //</span>
+                <span class="text-slate-500 text-[11px] font-mono tracking-wider uppercase">PARADIGM</span>
+              </div>
+
+              <!-- Title & Subtitle -->
+              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-[#ff8600] transition-colors mb-1">
+                {style.title}
+              </h3>
+              <p class="text-xs text-slate-400 mb-5 leading-relaxed">
+                {style.subtitle}
+              </p>
+
+              <!-- Live Accurate Design Sample Box -->
+              <div class="mb-5 p-4 sm:p-5 rounded-2xl bg-[#090b14] border border-white/5 overflow-hidden">
+                
+                {/* 1. Neumorphism Sample */}
+                {style.id === 'neumorphism' && (
+                  <div class="w-full p-4 rounded-2xl bg-[#141724] flex flex-col gap-4 select-none">
+                    <div class="flex items-center justify-between">
+                      {/* Extruded Playback Knob */}
+                      <div class="w-11 h-11 rounded-full bg-[#141724] shadow-[5px_5px_12px_#080a11,-5px_-5px_12px_#202437] flex items-center justify-center text-slate-300 hover:text-[#ff8600] active:shadow-[inset_3px_3px_6px_#080a11,inset_-3px_-3px_6px_#202437] transition-all cursor-pointer">
+                        <Play class="w-4 h-4 fill-current ml-0.5" />
+                      </div>
+
+                      {/* Extruded Chip Indicator */}
+                      <div class="px-3.5 py-1.5 rounded-full bg-[#141724] shadow-[4px_4px_8px_#080a11,-4px_-4px_8px_#202437] text-[11px] font-mono text-slate-300 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-[#ff8600] shadow-[0_0_8px_#ff8600]"></span>
+                        <span>Soft Surface</span>
+                      </div>
+                    </div>
+
+                    {/* Debossed Slider Track with Extruded Thumb */}
+                    <div class="w-full h-8 rounded-full bg-[#141724] shadow-[inset_3px_3px_6px_#080a11,inset_-3px_-3px_6px_#202437] p-1 flex items-center relative">
+                      <div class="w-6 h-6 rounded-full bg-[#141724] shadow-[2px_2px_5px_#080a11,-2px_-2px_5px_#22273a] flex items-center justify-center ml-auto mr-0.5 cursor-pointer">
+                        <div class="w-1.5 h-1.5 rounded-full bg-[#ff8600]"></div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 2. Neobrutalism Sample */}
+                {style.id === 'neobrutalism' && (
+                  <div class="w-full p-4 bg-[#ff9d2e] border-2 border-black shadow-[4px_4px_0px_#000000] text-black flex flex-col gap-3 select-none">
+                    <div class="flex items-center justify-between">
+                      <span class="font-black text-sm uppercase tracking-tight">CART//TOTAL</span>
+                      <span class="bg-white border-2 border-black px-2 py-0.5 text-xs font-black shadow-[2px_2px_0px_#000000]">$49.00</span>
+                    </div>
+
+                    <div class="bg-white border-2 border-black p-2 flex items-center justify-between shadow-[2px_2px_0px_#000000] font-mono text-xs font-bold">
+                      <span>PROMO: VIIDEV</span>
+                      <span class="text-emerald-700">APPLIED ✓</span>
+                    </div>
+
+                    <button class="w-full py-2 bg-black text-white font-black text-xs uppercase tracking-wider border-2 border-black shadow-[3px_3px_0px_#ffffff] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_#ffffff] transition-all cursor-pointer">
+                      CHECKOUT →
+                    </button>
+                  </div>
+                )}
+
+                {/* 3. Glassmorphism Sample - High-Performance Shader-Grade Frosted Glass */}
+                {style.id === 'glassmorphism' && (
+                  <div class="w-full relative overflow-hidden p-3 rounded-xl bg-[#090b14] min-h-[130px] flex items-center justify-center select-none" style="transform: translateZ(0);">
+                    {/* Ambient Glow Spheres using high-performance radial gradients (zero Gaussian blur cost) */}
+                    <div class="absolute -top-3 -left-3 w-24 h-24 rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(255,134,0,0.45) 0%, transparent 70%);"></div>
+                    <div class="absolute -bottom-3 -right-3 w-28 h-28 rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(37,99,235,0.4) 0%, transparent 70%);"></div>
+
+                    {/* Translucent Frosted Glass Layer */}
+                    <div class="relative z-10 w-full p-3.5 rounded-xl backdrop-blur-md bg-white/[0.08] border border-white/25 shadow-[0_8px_24px_0_rgba(0,0,0,0.35)] flex flex-col gap-2.5" style="transform: translateZ(0);">
+                      <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                          <div class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-[#ff8600]">
+                            <Sparkles class="w-3.5 h-3.5" />
+                          </div>
+                          <div>
+                            <span class="text-xs font-bold text-white block leading-none">Glass Engine</span>
+                            <span class="text-[10px] text-slate-300 font-mono">blur(12px) • alpha 0.08</span>
+                          </div>
+                        </div>
+                        <span class="w-2 h-2 rounded-full bg-[#ff8600] shadow-[0_0_8px_#ff8600]"></span>
+                      </div>
+
+                      <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden border border-white/15">
+                        <div class="bg-gradient-to-r from-[#ff8600] to-white h-full w-2/3 rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 4. Flat Design Sample */}
+                {style.id === 'flat' && (
+                  <div class="w-full p-3.5 rounded-lg bg-[#141824] border border-[#232b40] shadow-none flex flex-col gap-2.5 select-none">
+                    <div class="h-1 bg-[#ff8600] w-full"></div>
+                    
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs font-bold text-white font-mono">SERVER_NODE//01</span>
+                      <span class="px-2 py-0.5 bg-[#232b40] text-slate-300 text-[10px] font-mono">ONLINE</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                      <div class="p-2 bg-[#1a2030] border border-[#27314a]">
+                        <div class="text-[10px] font-mono text-slate-400">MEMORY</div>
+                        <div class="text-xs font-bold text-white font-mono mt-0.5">3.4 / 8 GB</div>
+                      </div>
+                      <div class="p-2 bg-[#1a2030] border border-[#27314a]">
+                        <div class="text-[10px] font-mono text-slate-400">CPU LOAD</div>
+                        <div class="text-xs font-bold text-[#ff8600] font-mono mt-0.5">24.6%</div>
+                      </div>
+                    </div>
+
+                    <button class="w-full py-1.5 bg-[#ff8600] text-black text-xs font-bold hover:bg-[#ffa033] transition-colors cursor-pointer text-center">
+                      RESTART SERVICE
+                    </button>
+                  </div>
+                )}
+
+                {/* 5. Claymorphism Sample */}
+                {style.id === 'claymorphism' && (
+                  <div class="w-full p-4 rounded-3xl bg-[#1e243a] shadow-[0_16px_32px_rgba(0,0,0,0.5),inset_5px_5px_10px_rgba(255,255,255,0.18),inset_-5px_-5px_10px_rgba(0,0,0,0.6)] flex flex-col gap-3 select-none">
+                    <div class="flex items-center justify-between">
+                      <div class="w-10 h-10 rounded-2xl bg-[#ff8600] shadow-[0_8px_16px_rgba(255,134,0,0.35),inset_3px_3px_6px_rgba(255,255,255,0.5),inset_-3px_-3px_6px_rgba(0,0,0,0.4)] flex items-center justify-center text-black font-black">
+                        <Zap class="w-5 h-5 fill-current" />
+                      </div>
+                      <div class="px-3 py-1 rounded-full bg-[#293252] shadow-[0_6px_12px_rgba(0,0,0,0.3),inset_3px_3px_6px_rgba(255,255,255,0.18),inset_-3px_-3px_6px_rgba(0,0,0,0.5)] text-[10px] font-bold text-[#ff8600]">
+                        3D INFLATED
+                      </div>
+                    </div>
+
+                    <div class="w-full py-2 rounded-2xl bg-[#2d3659] shadow-[0_10px_20px_rgba(0,0,0,0.35),inset_4px_4px_8px_rgba(255,255,255,0.15),inset_-4px_-4px_8px_rgba(0,0,0,0.5)] flex items-center justify-between px-3.5 text-xs font-bold text-white">
+                      <span class="text-slate-200">Volume Level</span>
+                      <span class="px-2 py-0.5 rounded-lg bg-[#ff8600] text-black text-[10px] font-black shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4),inset_-1px_-1px_2px_rgba(0,0,0,0.3)]">85%</span>
+                    </div>
+                  </div>
+                )}
+
+                {/* 6. Gridlines Sample - Clean, Connected Edge-to-Edge Architectural Grid */}
+                {style.id === 'gridlines' && (
+                  <div class="relative border border-white/20 bg-[#0a0d18] font-mono select-none rounded-lg overflow-hidden">
+                    {/* Outer Corner Crosshairs '+' */}
+                    <div class="absolute top-1 left-1.5 font-mono text-[10px] text-[#ff8600] z-20 pointer-events-none select-none">+</div>
+                    <div class="absolute top-1 right-1.5 font-mono text-[10px] text-[#ff8600] z-20 pointer-events-none select-none">+</div>
+                    <div class="absolute bottom-1 left-1.5 font-mono text-[10px] text-[#ff8600] z-20 pointer-events-none select-none">+</div>
+                    <div class="absolute bottom-1 right-1.5 font-mono text-[10px] text-[#ff8600] z-20 pointer-events-none select-none">+</div>
+
+                    {/* Contiguous 3x2 Grid connecting fully to all 4 edges */}
+                    <div class="grid grid-cols-3 divide-x divide-white/15 relative">
+                      {/* Internal Intersection Crosshairs '+' */}
+                      <div class="absolute top-1/2 left-[33.333%] -translate-x-1/2 -translate-y-1/2 text-[9px] text-[#ff8600]/80 pointer-events-none select-none z-10">+</div>
+                      <div class="absolute top-1/2 left-[66.666%] -translate-x-1/2 -translate-y-1/2 text-[9px] text-[#ff8600]/80 pointer-events-none select-none z-10">+</div>
+
+                      {/* Row 1 */}
+                      <div class="h-16 flex items-center justify-center p-2 text-slate-500 text-[10px]">
+                        01
+                      </div>
+                      <div class="h-16 flex items-center justify-center p-2 text-white font-bold text-xs tracking-wider bg-white/[0.02]">
+                        GRID//SYS
+                      </div>
+                      <div class="h-16 flex items-center justify-center p-2 text-slate-500 text-[10px]">
+                        02
+                      </div>
+
+                      {/* Row 2 (separated by full-width horizontal divider) */}
+                      <div class="h-16 border-t border-white/15 flex items-center justify-center p-2 text-slate-500 text-[10px]">
+                        X: 104
+                      </div>
+                      <div class="h-16 border-t border-white/15 flex items-center justify-center p-2 bg-white/[0.02]">
+                        <div class="w-1.5 h-1.5 rounded-full bg-[#ff8600] shadow-[0_0_8px_#ff8600]"></div>
+                      </div>
+                      <div class="h-16 border-t border-white/15 flex items-center justify-center p-2 text-slate-500 text-[10px]">
+                        Y: 088
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 7. Bento Grid Sample - Simplified, Clean Asymmetric Modular Tiles */}
+                {style.id === 'bento-grid' && (
+                  <div class="w-full grid grid-cols-1 sm:grid-cols-3 gap-3 select-none">
+                    
+                    {/* Tile 1: Latency / Sparkline (2 cols) */}
+                    <div class="sm:col-span-2 p-4 rounded-xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
+                      <div class="flex items-center justify-between text-xs font-mono text-slate-400">
+                        <span>THROUGHPUT // EDGE</span>
+                        <span class="inline-flex items-center gap-1.5 text-emerald-400 text-[11px]">
+                          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                          Live 8.4ms
+                        </span>
+                      </div>
+                      
+                      <div class="my-2.5">
+                        <svg viewBox="0 0 240 28" class="w-full h-7 stroke-[#ff8600] fill-none stroke-[2]" preserveAspectRatio="none">
+                          <path d="M0,18 Q40,4 80,16 T160,8 T240,14" />
+                          <path d="M0,18 Q40,4 80,16 T160,8 T240,14 L240,28 L0,28 Z" class="fill-[#ff8600]/10 stroke-none" />
+                        </svg>
+                      </div>
+
+                      <div class="text-[11px] font-mono text-slate-500 flex justify-between">
+                        <span>Sub-second LCP</span>
+                        <span>Global Sync</span>
+                      </div>
+                    </div>
+
+                    {/* Tile 2: Edge CDN (1 col) */}
+                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
+                      <span class="text-xs font-mono text-slate-400">GLOBAL CDN</span>
+                      <div class="my-1.5">
+                        <div class="text-2xl font-bold font-mono text-white">32<span class="text-xs text-[#ff8600] font-normal ml-1">PoPs</span></div>
+                        <span class="text-[11px] font-mono text-slate-400">Distributed</span>
+                      </div>
+                      <span class="text-[10px] font-mono text-emerald-400">99.99% Up</span>
+                    </div>
+
+                    {/* Tile 3: Lighthouse (1 col) */}
+                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
+                      <span class="text-xs font-mono text-slate-400">LIGHTHOUSE</span>
+                      <div class="my-1.5">
+                        <div class="text-2xl font-bold font-mono text-white">100<span class="text-xs text-slate-500 font-normal">/100</span></div>
+                        <span class="text-[11px] font-mono text-emerald-400">Optimal Audit</span>
+                      </div>
+                      <span class="text-[10px] font-mono text-slate-500">Zero CLS</span>
+                    </div>
+
+                    {/* Tile 4: Modular Tech Stack (2 cols) */}
+                    <div class="sm:col-span-2 p-4 rounded-xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
+                      <div class="flex items-center justify-between text-xs font-mono text-slate-400">
+                        <span>MODULAR ISLANDS</span>
+                        <span class="text-[10px] font-mono text-slate-500">0kb JS Default</span>
+                      </div>
+
+                      <div class="flex flex-wrap gap-2 my-2.5">
+                        <span class="px-2.5 py-1 rounded-md bg-white/[0.06] border border-white/10 text-white font-mono text-xs">Astro 7</span>
+                        <span class="px-2.5 py-1 rounded-md bg-white/[0.06] border border-white/10 text-white font-mono text-xs">Tailwind v4</span>
+                        <span class="px-2.5 py-1 rounded-md bg-[#ff8600]/15 border border-[#ff8600]/30 text-[#ff8600] font-mono text-xs">Three.js</span>
+                      </div>
+
+                      <div class="text-[11px] font-mono text-slate-500 flex justify-between">
+                        <span>Island Architecture</span>
+                        <span class="text-slate-400">Edge SSR</span>
+                      </div>
+                    </div>
+
+                  </div>
+                )}
+
+              </div>
+
+              <!-- Description -->
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                {style.description}
+              </p>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+
+    <!-- Outer Side Crosshairs '+' at the bottom of the grid -->
+    <div class="absolute -bottom-2.5 -left-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
+    <div class="absolute -bottom-2.5 -right-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
+  </div>
+</section>
