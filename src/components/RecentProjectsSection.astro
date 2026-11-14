@@ -1,0 +1,138 @@
+---
+// RecentProjectsSection.astro - Connected Architectural Grid Line Matrix
+import { ExternalLink, GitBranch } from 'lucide-astro';
+const projects = [
+  {
+    index: '01',
+    id: 'billmora',
+    title: 'Billmora',
+    description: 'Open-source billing management with automated provisioning, recurring automation, and full control — forever free.',
+    image: 'https://camo.githubusercontent.com/7bb4dcdc63351ab96d410a624764c78e1eca78e0be3b0ac7b33ebab1ca3b13ce/68747470733a2f2f6d656469612e62696c6c6d6f72612e636f6d2f696d6167652f61646d696e2d64617368626f6172642e706e67',
+    previewUrl: 'https://billmora.com/demo',
+    repoUrl: 'https://github.com/Billmora/billmora'
+  },
+  {
+    index: '02',
+    id: 'octavia-page',
+    title: 'Octavia Company Page',
+    description: 'Octavia offers fast and reliable hosting for game servers, websites, bots, and databases.',
+    image: 'https://assets.octavia.id/assets/frame/homepage.png',
+    previewUrl: 'https://octavia.id/',
+    repoUrl: '#'
+  },
+  {
+    index: '03',
+    id: 'bdev',
+    title: 'BDEV CLI',
+    description: 'A simple CLI tool for Minecraft Bedrock Edition addon development.',
+    image: '',
+    previewUrl: '#',
+    repoUrl: 'https://github.com/Nekoplii'
+  }
+];
+---
+
+<section id="projects" class="py-20 sm:py-28 relative -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 border-t border-white/10">
+  <!-- Container Intersection Crosshairs '+' -->
+  <div class="absolute -top-2.5 -left-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
+  <div class="absolute -top-2.5 -right-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
+
+  <!-- Centered Section Header -->
+  <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+    <h2 class="text-3xl sm:text-5xl font-bold text-white tracking-tight">
+      Featured <span class="bg-gradient-to-r from-[#ff8600] to-[#ffa033] bg-clip-text text-transparent">Projects</span>
+    </h2>
+    <p class="text-slate-400 text-sm sm:text-base mt-3">
+      Selected software, web platforms, and backend infrastructure tooling.
+    </p>
+  </div>
+
+  <!-- Connected Architectural Grid Line Matrix -->
+  <div class="relative rounded-2xl border border-white/10 bg-[#0d0f15] overflow-hidden shadow-2xl">
+    
+    <!-- Outer Corner Crosshairs '+' -->
+    <div class="absolute top-2 left-2.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-10">+</div>
+    <div class="absolute top-2 right-2.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-10">+</div>
+    <div class="absolute bottom-2 left-2.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-10">+</div>
+    <div class="absolute bottom-2 right-2.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-10">+</div>
+
+    <!-- Contiguous Grid: vertical lines divide-x connect seamlessly with full-width horizontal dividing lines -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-white/10">
+      {projects.map((project) => (
+        <article class="flex flex-col justify-between group hover:bg-white/[0.02] transition-colors relative">
+          
+          <!-- 1. Top Meta Bar (Connected Horizontal Divider Line running edge-to-edge) -->
+          <div class="w-full px-6 sm:px-8 py-3.5 border-b border-white/10 flex items-center justify-between font-mono text-xs">
+            <span class="text-[#ff8600] font-semibold">{project.index} //</span>
+            <span class="text-slate-400 group-hover:text-slate-300 transition-colors">ECOSYSTEM</span>
+          </div>
+
+          <!-- 2. Main Content Area (Framed Image, Title, Description) -->
+          <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+            <div>
+              <!-- Framed Image or Title-based Thumbnail Fallback -->
+              <div class="relative w-full aspect-[16/10] rounded-xl overflow-hidden mb-6 bg-[#131622] border border-white/10 group-hover:border-[#ff8600]/30 transition-all flex items-center justify-center">
+                {project.image && project.image.trim() !== '' ? (
+                  <div class="w-full h-full relative flex items-center justify-center">
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                      loading="lazy"
+                      onerror="this.style.display='none'; if(this.nextElementSibling) { this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex'); }"
+                    />
+                    <div class="hidden absolute inset-0 bg-[#131622] items-center justify-center p-6 text-center select-none">
+                      <span class="text-lg sm:text-xl font-bold text-slate-200 group-hover:text-[#ff8600] transition-colors tracking-tight line-clamp-2 px-4">
+                        {project.title}
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <div class="w-full h-full bg-[#131622] flex items-center justify-center p-6 text-center select-none">
+                    <span class="text-lg sm:text-xl font-bold text-slate-200 group-hover:text-[#ff8600] transition-colors tracking-tight line-clamp-2 px-4">
+                      {project.title}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              <!-- Title -->
+              <h3 class="text-xl font-bold text-white group-hover:text-[#ff8600] transition-colors mb-2.5">
+                {project.title}
+              </h3>
+
+              <!-- Description -->
+              <p class="text-sm text-slate-300 leading-relaxed font-normal">
+                {project.description}
+              </p>
+            </div>
+          </div>
+
+          <!-- 3. Bottom Action Bar (Connected Horizontal Divider Line running edge-to-edge) -->
+          <div class="w-full px-6 sm:px-8 py-4 border-t border-white/10 flex items-center gap-3 mt-auto bg-white/[0.01]">
+            <a 
+              href={project.previewUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="flex-1 py-2 px-3 text-center rounded-xl text-xs sm:text-sm font-semibold text-black bg-[#ff8600] hover:bg-[#ff9c2b] transition-colors flex items-center justify-center gap-1.5"
+            >
+              <span>Preview</span>
+              <ExternalLink class="w-3.5 h-3.5" />
+            </a>
+
+            <a 
+              href={project.repoUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="py-2 px-3.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-300 bg-white/5 hover:bg-white/10 hover:text-white border border-white/10 transition-colors flex items-center justify-center gap-1.5"
+            >
+              <GitBranch class="w-4 h-4" />
+              <span>Repository</span>
+            </a>
+          </div>
+
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,144 @@
+---
+// TechStackSection.astro - Architectural Grid Line Matrix with Authentic Tech Brand Icons
+import {
+siAlpinedotjs,
+siBun,
+siCss,
+siDocker,
+siGit,
+siGnubash,
+siHtml5,
+siJavascript,
+siLaravel,
+siLivewire,
+siMariadb,
+siMysql,
+siNextdotjs,
+siNginx,
+siNodedotjs,
+siPhp,
+siPython,
+siReact,
+siRust,
+siSqlite,
+siTailwindcss,
+siTypescript
+} from 'simple-icons';
+
+// High-contrast authentic colors tuned for the dark background (#0d0f15)
+const brandOverrides: Record<string, string> = {
+  'Rust': '#DEA584',
+  'NextJS': '#FFFFFF',
+  'Bun': '#FBF0DF',
+  'MariaDB': '#4EA8C5',
+  'SQLite': '#38BDF8',
+  'Livewire': '#FB70A9',
+  'CSS': '#38BDF8'
+};
+
+const techList = [
+  { name: 'PHP', icon: siPhp },
+  { name: 'TypeScript', icon: siTypescript },
+  { name: 'JavaScript', icon: siJavascript },
+  { name: 'Python', icon: siPython },
+  { name: 'Rust', icon: siRust },
+  { name: 'Node.js', icon: siNodedotjs },
+  { name: 'HTML', icon: siHtml5 },
+  { name: 'CSS', icon: siCss },
+  { name: 'Laravel', icon: siLaravel },
+  { name: 'NextJS', icon: siNextdotjs },
+  { name: 'Livewire', icon: siLivewire },
+  { name: 'Alpine.js', icon: siAlpinedotjs },
+  { name: 'Tailwind CSS', icon: siTailwindcss },
+  { name: 'React', icon: siReact },
+  { name: 'Bun', icon: siBun },
+  { name: 'Docker', icon: siDocker },
+  { name: 'NGINX', icon: siNginx },
+  { name: 'Bash', icon: siGnubash },
+  { name: 'MySQL', icon: siMysql },
+  { name: 'MariaDB', icon: siMariadb },
+  { name: 'SQLite', icon: siSqlite },
+  { name: 'Git', icon: siGit }
+].map((item) => ({
+  name: item.name,
+  path: item.icon.path,
+  color: brandOverrides[item.name] || `#${item.icon.hex}`
+}));
+---
+
+<section id="techstack" class="py-20 sm:py-28 relative -mx-4 sm:-mx-6 lg:-mx-8 border-t border-white/10">
+  <!-- Container Intersection Crosshairs '+' aligned with max-w-7xl borders -->
+  <div class="absolute -top-2.5 -left-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
+  <div class="absolute -top-2.5 -right-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
+
+  <!-- Centered Section Header -->
+  <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16 px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl sm:text-5xl font-bold text-white tracking-tight">
+      Core <span class="bg-gradient-to-r from-[#ff8600] to-[#ffa033] bg-clip-text text-transparent">TechStack</span>
+    </h2>
+    <p class="text-slate-400 text-sm sm:text-base mt-3">
+      Languages, frameworks, runtimes, databases, and infrastructure tools powering production systems.
+    </p>
+  </div>
+
+  <!-- Architectural Grid Line Matrix: Flush to max-w-7xl borders with deep solid background -->
+  <div class="relative border-t border-white/10 w-full bg-[#0d0f15] shadow-2xl">
+    
+    <!-- Outer Side Crosshairs '+' at the top of the grid -->
+    <div class="absolute -top-2.5 -left-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
+    <div class="absolute -top-2.5 -right-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
+
+    <!-- 22 Tech Items Grid: 2 columns on mobile, 4 columns on desktop -->
+    <div class="grid grid-cols-2 md:grid-cols-4 w-full">
+      {techList.map((item, idx) => {
+        // Border classes to ensure clean single-pixel divider lines connecting with max-w-7xl
+        const isMobileRightEdge = idx % 2 === 1;
+        const isDesktopRightEdge = idx < 20 ? (idx % 4 === 3) : (idx === 21);
+        const isSpan2 = idx >= 20; // Last 2 items (SQLite & Git) span 2 columns on md:grid-cols-4
+
+        const borderClasses = [
+          'border-b border-white/10',
+          isMobileRightEdge ? 'border-r-0' : 'border-r border-white/10',
+          isDesktopRightEdge ? 'md:border-r-0' : 'md:border-r md:border-white/10'
+        ].join(' ');
+
+        const colSpanClass = isSpan2 ? 'md:col-span-2' : '';
+
+        return (
+          <div class={`p-4 sm:p-6 flex items-center justify-between group bg-[#10131e]/70 hover:bg-[#161a29]/95 transition-colors relative ${borderClasses} ${colSpanClass}`}>
+            <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+              <!-- Real Brand Icon Wrapper -->
+              <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#141824] border border-white/10 flex items-center justify-center p-2 group-hover:border-[#ff8600]/40 group-hover:bg-[#1a2030] transition-all flex-shrink-0 shadow-sm">
+                <svg
+                  role="img"
+                  viewBox="0 0 24 24"
+                  class="w-5 h-5 transition-transform duration-300 group-hover:scale-110"
+                  fill="currentColor"
+                  style={`color: ${item.color};`}
+                >
+                  <path d={item.path} />
+                </svg>
+              </div>
+
+              <!-- Tech Name -->
+              <div class="min-w-0">
+                <span class="text-xs sm:text-sm md:text-base font-semibold text-white group-hover:text-[#ff8600] transition-colors truncate block">
+                  {item.name}
+                </span>
+              </div>
+            </div>
+
+            <!-- Subtle Numeric Index -->
+            <span class="font-mono text-[10px] sm:text-xs text-slate-500 group-hover:text-slate-300 transition-colors pl-2 flex-shrink-0">
+              {idx < 9 ? `0${idx + 1}` : idx + 1}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- Outer Side Crosshairs '+' at the bottom of the grid -->
+    <div class="absolute -bottom-2.5 -left-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
+    <div class="absolute -bottom-2.5 -right-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
+  </div>
+</section>
