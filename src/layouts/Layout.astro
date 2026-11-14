@@ -1,0 +1,108 @@
+---
+// Layout.astro
+import '../styles/global.css';
+import GlobeBackground from '../components/GlobeBackground.astro';
+import FloatingHeader from '../components/FloatingHeader.astro';
+import SidebarDrawer from '../components/SidebarDrawer.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "Viidev • Systems, Web & Backend Engineering",
+  description = "Developing systems for web, desktop, and servers. Open-source development, web platforms, and system administration." 
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="https://assets.viidev.my.id/images/logo/main.png" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#ff8600" />
+
+    <!-- OpenGraph / Social Meta -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://assets.viidev.my.id/images/logo/main.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Preconnect Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-[#0d0f15] text-[#d1d5db] font-sans antialiased min-h-screen relative selection:bg-[#ff8600] selection:text-[#0d0f15]">
+    
+    <!-- 3D Globe to 2D Grid Background Object (Clean without color blobs) -->
+    <GlobeBackground />
+
+    <!-- Floating Header (max-w-4xl) with mobile breadcrumb -->
+    <FloatingHeader />
+
+    <!-- Slide-out Sidebar Drawer (Home, Projects, Workflow, About) -->
+    <SidebarDrawer />
+
+    <!-- Body Layout (max-w-7xl) with architectural grid lines (Clean without backdrop-blur) -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 border-x border-white/10">
+      
+      <!-- Subtle vertical interior grid guide lines running down the body -->
+      <div class="absolute inset-0 pointer-events-none hidden md:grid grid-cols-4 divide-x divide-white/[0.04] select-none -z-10">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+      <slot />
+      <Footer />
+    </main>
+
+    <!-- Lenis Momentum Smooth Scrolling -->
+    <script>
+      import Lenis from 'lenis';
+
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        wheelMultiplier: 0.9,
+        touchMultiplier: 1.5,
+      });
+
+      (window as any).lenis = lenis;
+
+      function raf(time: number) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      // Intercept anchor clicks for smooth scroll navigation
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', (e) => {
+          const href = (anchor as HTMLAnchorElement).getAttribute('href');
+          if (href && href.length > 1) {
+            const target = document.querySelector(href);
+            if (target) {
+              e.preventDefault();
+              lenis.scrollTo(target as HTMLElement, { offset: -80, duration: 1.2 });
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

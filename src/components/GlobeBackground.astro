@@ -1,0 +1,304 @@
+---
+import worldData from '../data/world-data.json';
+---
+
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none" id="globe-container">
+  <!-- The Three.js WebGL Canvas (clean background with 100% clarity & sharpness) -->
+  <canvas id="globe-bg-canvas" class="w-full h-full block opacity-100"></canvas>
+</div>
+
+<script>
+  import * as THREE from 'three';
+  import worldData from '../data/world-data.json';
+
+  const canvas = document.getElementById('globe-bg-canvas') as HTMLCanvasElement;
+
+  if (canvas) {
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 0, 7.8);
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+      alpha: true,
+      powerPreference: 'high-performance'
+    });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // Radii & dimensions
+    const R_GLOBE = 3.2;
+    const R_OUTLINE = 3.22;
+    const MAP_W = 12.8;
+    const MAP_H = 6.4;
+
+    // --- Vertex and Fragment Shaders for Morphing Lines ---
+    const vertexShader = `
+      attribute vec3 pos3d;
+      attribute vec3 pos2d;
+      attribute float aAlpha;
+
+      uniform float uProgress;
+      uniform float uRotation;
+      uniform vec2 uMouse;
+
+      varying float vAlpha;
+
+      void main() {
+        vAlpha = aAlpha;
+
+        // Steady rotation around Y axis (strictly time-based, unaffected by scroll jumps)
+        float rot = uRotation;
+        float cr = cos(rot);
+        float sr = sin(rot);
+        vec3 rPos = vec3(
+          pos3d.x * cr + pos3d.z * sr,
+          pos3d.y,
+          -pos3d.x * sr + pos3d.z * cr
+        );
+
+        // Axial tilt (approx 23.5 deg = 0.41 rad), fades as uProgress -> 1.0
+        float tilt = 0.41 * (1.0 - uProgress);
+        float ct = cos(tilt);
+        float st = sin(tilt);
+        vec3 tiltedPos = vec3(
+          rPos.x,
+          rPos.y * ct - rPos.z * st,
+          rPos.y * st + rPos.z * ct
+        );
+
+        // Subtle mouse parallax depth effect
+        float parallaxFactor = mix(0.2, 0.08, uProgress);
+        vec3 mouseOffset = vec3(uMouse.x * parallaxFactor, uMouse.y * parallaxFactor, 0.0);
+
+        // Smooth cubic ease interpolation
+        float t = smoothstep(0.0, 1.0, uProgress);
+        vec3 morphed = mix(tiltedPos, pos2d, t);
+
+        // In 2D mode, slightly shift upwards to center visually on screen
+        morphed.y += t * 0.2;
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(morphed + mouseOffset, 1.0);
+      }
+    `;
+
+    const fragmentShader = `
+      uniform vec3 uColor;
+      uniform float uOpacity;
+      varying float vAlpha;
+
+      void main() {
+        gl_FragColor = vec4(uColor, vAlpha * uOpacity);
+      }
+    `;
+
+    // --- Helper to build geometry from segments ---
+    function buildMorphGeometry(
+      segments: Array<Array<{ lon: number; lat: number }>>,
+      rGlobe: number
+    ) {
+      const pos3dArr: number[] = [];
+      const pos2dArr: number[] = [];
+      const alphaArr: number[] = [];
+
+      for (const line of segments) {
+        for (let i = 0; i < line.length - 1; i++) {
+          const pt1 = line[i];
+          const pt2 = line[i + 1];
+
+          // Pt 1
+          const lam1 = (pt1.lon * Math.PI) / 180;
+          const phi1 = (pt1.lat * Math.PI) / 180;
+          const x3d1 = rGlobe * Math.cos(phi1) * Math.sin(lam1);
+          const y3d1 = rGlobe * Math.sin(phi1);
+          const z3d1 = rGlobe * Math.cos(phi1) * Math.cos(lam1);
+          const x2d1 = (pt1.lon / 180) * (MAP_W / 2);
+          const y2d1 = (pt1.lat / 90) * (MAP_H / 2);
+          const z2d1 = 0;
+
+          // Pt 2
+          const lam2 = (pt2.lon * Math.PI) / 180;
+          const phi2 = (pt2.lat * Math.PI) / 180;
+          const x3d2 = rGlobe * Math.cos(phi2) * Math.sin(lam2);
+          const y3d2 = rGlobe * Math.sin(phi2);
+          const z3d2 = rGlobe * Math.cos(phi2) * Math.cos(lam2);
+          const x2d2 = (pt2.lon / 180) * (MAP_W / 2);
+          const y2d2 = (pt2.lat / 90) * (MAP_H / 2);
+          const z2d2 = 0;
+
+          // Avoid horizontal wrap-around line across the 2D map edge
+          if (Math.abs(pt1.lon - pt2.lon) > 180) continue;
+
+          pos3dArr.push(x3d1, y3d1, z3d1, x3d2, y3d2, z3d2);
+          pos2dArr.push(x2d1, y2d1, z2d1, x2d2, y2d2, z2d2);
+          alphaArr.push(1.0, 1.0);
+        }
+      }
+
+      const geom = new THREE.BufferGeometry();
+      geom.setAttribute('position', new THREE.Float32BufferAttribute(pos3dArr, 3));
+      geom.setAttribute('pos3d', new THREE.Float32BufferAttribute(pos3dArr, 3));
+      geom.setAttribute('pos2d', new THREE.Float32BufferAttribute(pos2dArr, 3));
+      geom.setAttribute('aAlpha', new THREE.Float32BufferAttribute(alphaArr, 1));
+      return geom;
+    }
+
+    // --- 1. Graticule Grid Lines (Parallels & Meridians -> 2D Grid Squares) ---
+    const graticuleLines: Array<Array<{ lon: number; lat: number }>> = [];
+
+    // Parallels (Latitudes from -75 to 75 every 15 deg)
+    for (let lat = -75; lat <= 75; lat += 15) {
+      const ring: Array<{ lon: number; lat: number }> = [];
+      for (let lon = -180; lon <= 180; lon += 5) {
+        ring.push({ lon, lat });
+      }
+      graticuleLines.push(ring);
+    }
+
+    // Meridians (Longitudes from -180 to 180 every 15 deg)
+    for (let lon = -180; lon <= 180; lon += 15) {
+      const line: Array<{ lon: number; lat: number }> = [];
+      for (let lat = -80; lat <= 80; lat += 5) {
+        line.push({ lon, lat });
+      }
+      graticuleLines.push(line);
+    }
+
+    const gridGeom = buildMorphGeometry(graticuleLines, R_GLOBE);
+    const gridUniforms = {
+      uProgress: { value: 0.0 },
+      uRotation: { value: 0.0 },
+      uMouse: { value: new THREE.Vector2(0, 0) },
+      uColor: { value: new THREE.Color(0.2, 0.26, 0.36) },
+      uOpacity: { value: 0.18 }
+    };
+    const gridMat = new THREE.ShaderMaterial({
+      vertexShader,
+      fragmentShader,
+      uniforms: gridUniforms,
+      transparent: true,
+      depthWrite: false
+    });
+    const gridMesh = new THREE.LineSegments(gridGeom, gridMat);
+    scene.add(gridMesh);
+
+    // --- 2. Country Outlines (Soft, slightly faded warm orange) ---
+    const countryLines: Array<Array<{ lon: number; lat: number }>> = [];
+    for (const ring of (worldData.rings as Array<Array<[number, number]>>)) {
+      const pts = ring.map(([lon, lat]) => ({ lon, lat }));
+      countryLines.push(pts);
+    }
+
+    const countryGeom = buildMorphGeometry(countryLines, R_OUTLINE);
+    const countryUniforms = {
+      uProgress: { value: 0.0 },
+      uRotation: { value: 0.0 },
+      uMouse: { value: new THREE.Vector2(0, 0) },
+      uColor: { value: new THREE.Color(0.82, 0.44, 0.12) }, // Softer, faded warm orange
+      uOpacity: { value: 0.48 }
+    };
+    const countryMat = new THREE.ShaderMaterial({
+      vertexShader,
+      fragmentShader,
+      uniforms: countryUniforms,
+      transparent: true,
+      depthWrite: false
+    });
+    const countryMesh = new THREE.LineSegments(countryGeom, countryMat);
+    scene.add(countryMesh);
+
+    // --- 3. Ambient Space Particles ---
+    const starCount = 150;
+    const starPositions: number[] = [];
+    for (let i = 0; i < starCount; i++) {
+      starPositions.push(
+        (Math.random() - 0.5) * 30,
+        (Math.random() - 0.5) * 20,
+        (Math.random() - 0.5) * 15 - 5
+      );
+    }
+    const starGeom = new THREE.BufferGeometry();
+    starGeom.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3));
+    const starMat = new THREE.PointsMaterial({
+      color: 0xffffff,
+      size: 0.03,
+      transparent: true,
+      opacity: 0.25
+    });
+    const starPoints = new THREE.Points(starGeom, starMat);
+    scene.add(starPoints);
+
+    // --- Scroll & Mouse Interaction (Carefully calibrated to prevent rapid jump) ---
+    let targetProgress = 0.0;
+    let currentProgress = 0.0;
+    let autoRotation = 0.0;
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetMouseX = 0;
+    let targetMouseY = 0;
+
+    function onScroll() {
+      const scrollY = window.scrollY;
+      // Morph unfolds progressively across ~2 viewports to eliminate rapid snapping
+      const maxScroll = Math.max(window.innerHeight * 2.2, 1600);
+      targetProgress = Math.min(1.0, Math.max(0.0, scrollY / maxScroll));
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    window.addEventListener('mousemove', (e) => {
+      targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
+      targetMouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    // --- Resize Handler ---
+    function onResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+    window.addEventListener('resize', onResize);
+
+    // --- Main Animation Loop ---
+    let lastTime = performance.now();
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const now = performance.now();
+      const delta = (now - lastTime) / 1000;
+      lastTime = now;
+
+      // Gentle damping factor (0.04) ensures continuous cinematic transition without speed spikes
+      currentProgress += (targetProgress - currentProgress) * 0.04;
+      mouseX += (targetMouseX - mouseX) * 0.05;
+      mouseY += (targetMouseY - mouseY) * 0.05;
+
+      // Steady auto-rotation based on time, smoothly decelerating as it flattens into 2D
+      autoRotation += delta * 0.18 * Math.max(0.0, 1.0 - currentProgress);
+      if (autoRotation > Math.PI * 2) {
+        autoRotation -= Math.PI * 2;
+      }
+
+      // Update uniforms
+      gridUniforms.uProgress.value = currentProgress;
+      gridUniforms.uRotation.value = autoRotation;
+      gridUniforms.uMouse.value.set(mouseX, mouseY);
+
+      countryUniforms.uProgress.value = currentProgress;
+      countryUniforms.uRotation.value = autoRotation;
+      countryUniforms.uMouse.value.set(mouseX, mouseY);
+
+      // Adjust camera distance slightly when flat for optimal fit
+      const targetCamZ = THREE.MathUtils.lerp(7.8, 8.8, currentProgress);
+      camera.position.z += (targetCamZ - camera.position.z) * 0.04;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+    onScroll();
+  }
+</script>
