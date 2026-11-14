@@ -1,0 +1,41 @@
+---
+// HeroSection.astro
+import { ArrowDown, GitBranch } from 'lucide-astro';
+---
+
+<section id="hero" class="relative -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 h-dvh min-h-[580px] flex flex-col justify-center items-center text-center overflow-hidden">
+  <div class="relative z-10 flex flex-col items-center text-center">
+    
+    <!-- Main Title (font-bold) -->
+    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white max-w-4xl leading-[1.15] mb-6">
+      Architecting <span class="bg-gradient-to-r from-[#ff8600] via-[#ffa233] to-[#ffbe5c] bg-clip-text text-transparent">software ecosystems</span>.
+    </h1>
+
+    <!-- Subtitle / Value Proposition -->
+    <p class="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed mb-10 font-normal">
+      I build interconnected web tools, manage high-performance hosting infrastructure, and develop resource-efficient desktop applications.
+    </p>
+
+    <!-- 2 Action Buttons: Explore projects and GitHub (Hover color only, no Y movement, no shadow) -->
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a 
+        href="#projects" 
+        class="px-7 py-3 rounded-full text-sm font-semibold text-black bg-[#ff8600] hover:bg-[#ff9c2b] transition-colors flex items-center gap-2"
+      >
+        <span>Explore projects</span>
+        <ArrowDown class="w-4 h-4" />
+      </a>
+
+      <a 
+        href="https://github.com/Nekoplii" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="px-7 py-3 rounded-full text-sm font-semibold text-white glass-card hover:bg-white/10 hover:border-[#ff8600]/40 hover:text-[#ff8600] transition-colors flex items-center gap-2"
+      >
+        <GitBranch class="w-4 h-4" />
+        <span>GitHub</span>
+      </a>
+    </div>
+
+  </div>
+</section>
