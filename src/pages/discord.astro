@@ -1,0 +1,56 @@
+---
+// src/pages/discord.astro - Fast Redirect to Mafly Code Discord Community
+import { siDiscord } from 'simple-icons';
+
+const inviteUrl = "https://discord.com/invite/RRsDcW89J5";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mafly Code Community | Discord</title>
+    <meta name="robots" content="noindex, follow" />
+    
+    <!-- Instant Meta Refresh Redirect -->
+    <meta http-equiv="refresh" content={`0;url=${inviteUrl}`} />
+    <link rel="canonical" href={inviteUrl} />
+
+    <!-- OpenGraph Preview -->
+    <meta property="og:title" content="Mafly Code Discord Community" />
+    <meta property="og:description" content="Join the Mafly Code Discord community for systems architecture, open-source projects, and engineering discussions." />
+    <meta property="og:url" content="https://mafly.my.id/discord" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://media.mafly.my.id/logo/primary.png" />
+    <meta name="theme-color" content="#5865F2" />
+
+    <link rel="icon" type="image/svg+xml" href="https://media.mafly.my.id/logo/primary.svg" />
+
+    <!-- Instant JS Redirect -->
+    <script define:vars={{ inviteUrl }}>
+      window.location.replace(inviteUrl);
+    </script>
+  </head>
+  <body class="bg-[#0f121a] text-slate-300 font-sans flex items-center justify-center min-h-screen p-6 text-center select-none">
+    <div class="max-w-sm w-full p-8 rounded-2xl border border-white/10 bg-[#151923] shadow-2xl flex flex-col items-center gap-4">
+      <div class="w-12 h-12 rounded-xl bg-[#5865F2]/10 border border-[#5865F2]/25 flex items-center justify-center text-[#5865F2]">
+        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+          <path d={siDiscord.path} />
+        </svg>
+      </div>
+      <div>
+        <h1 class="text-lg font-bold text-white tracking-tight">Mafly Code</h1>
+        <p class="text-xs text-slate-400 mt-1">
+          Redirecting to Discord community invite...
+        </p>
+      </div>
+      <a 
+        href={inviteUrl} 
+        class="mt-2 w-full py-2.5 px-4 rounded-xl bg-[#5865F2] hover:bg-[#4752c4] text-white text-xs font-semibold transition-colors flex items-center justify-center gap-2"
+      >
+        <span>Join Community</span>
+      </a>
+    </div>
+  </body>
+</html>

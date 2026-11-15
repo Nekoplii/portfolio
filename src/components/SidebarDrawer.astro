@@ -1,6 +1,7 @@
 ---
 // SidebarDrawer.astro - Architectural Grid Slide-Over Drawer
 import { ArrowUpRight, GitBranch, Mail, X } from 'lucide-astro';
+import { siDiscord } from 'simple-icons';
 
 const pathname = Astro.url.pathname;
 
@@ -115,11 +116,11 @@ const navItems = [
 
     <!-- Drawer Footer -->
     <div class="border-t border-white/10 p-6 space-y-4 bg-white/[0.01]">
-      <div class="grid grid-cols-2 gap-3">
+      <div class="grid grid-cols-3 gap-2">
         <!-- Direct Email Link -->
         <a 
           href="mailto:code.mafly@gmail.com" 
-          class="p-2.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] border border-white/10 text-xs font-mono text-slate-300 hover:text-white transition-colors flex items-center justify-center gap-2"
+          class="p-2.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] border border-white/10 text-xs font-mono text-slate-300 hover:text-white transition-colors flex items-center justify-center gap-1.5"
         >
           <Mail class="w-3.5 h-3.5 text-[#ff8600]" />
           <span>Email</span>
@@ -130,16 +131,29 @@ const navItems = [
           href="https://github.com/Nekoplii" 
           target="_blank" 
           rel="noopener noreferrer" 
-          class="p-2.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] border border-white/10 text-xs font-mono text-slate-300 hover:text-white transition-colors flex items-center justify-center gap-2"
+          class="p-2.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] border border-white/10 text-xs font-mono text-slate-300 hover:text-white transition-colors flex items-center justify-center gap-1.5"
         >
           <GitBranch class="w-3.5 h-3.5 text-[#ff8600]" />
           <span>GitHub</span>
+        </a>
+
+        <!-- Discord Community Link -->
+        <a 
+          href="/discord" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="p-2.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] border border-white/10 text-xs font-mono text-slate-300 hover:text-white transition-colors flex items-center justify-center gap-1.5"
+        >
+          <svg class="w-3.5 h-3.5 fill-[#5865F2]" viewBox="0 0 24 24">
+            <path d={siDiscord.path} />
+          </svg>
+          <span>Discord</span>
         </a>
       </div>
 
       <!-- Bottom Meta -->
       <div class="flex items-center justify-between text-[11px] font-mono text-slate-500 pt-2 border-t border-white/5">
-        <span>UTC+7 • INDONESIA</span>
+        <span>UTC+7 | INDONESIA</span>
         <span class="text-[#ff8600]">MAFLY // 2026</span>
       </div>
     </div>
