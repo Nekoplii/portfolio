@@ -1,87 +1,67 @@
 ---
 // Footer.astro - Architectural Grid Layout Footer
-import { ArrowUp, GitBranch } from 'lucide-astro';
+import { ArrowUp, ArrowUpRight, GitBranch } from 'lucide-astro';
 ---
 
-<footer class="pt-16 pb-12 border-t border-white/10 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 relative z-10 text-xs text-slate-400 bg-[#0d0f15]">
+<footer class="pt-12 pb-10 border-t border-white/10 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 relative z-10 text-xs text-slate-400 bg-[#0f121a]">
   <!-- Container Intersection Crosshairs '+' aligned with max-w-7xl borders -->
   <div class="absolute -top-2.5 -left-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
   <div class="absolute -top-2.5 -right-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
 
-  <!-- Upper Tier: Brand, Directory, and Action Links -->
-  <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-white/10">
+  <!-- Upper Row: Brand, Navigation & Social -->
+  <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-white/10">
     
-    <!-- Left: Brand Info & Status (5 cols on md) -->
-    <div class="md:col-span-5 space-y-4">
-      <div class="flex items-center gap-2.5">
-        <img 
-          src="https://assets.viidev.my.id/images/logo/main.png" 
-          alt="Mafly Logo" 
-          class="h-7 w-auto object-contain"
-        />
-        <span class="text-base font-bold tracking-tight text-white">Mafly</span>
-      </div>
-      <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
-        Architecting software ecosystems, managing high-performance hosting infrastructure, and developing resource-efficient desktop applications.
-      </p>
-      <div class="inline-flex items-center gap-2 text-[11px] font-mono text-slate-400">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span>Available for technical architecture & systems engineering</span>
+    <!-- Left: Brand Identity -->
+    <div class="flex items-center gap-3">
+      <img 
+        src="https://assets.viidev.my.id/images/logo/main.png" 
+        alt="Mafly Logo" 
+        class="h-7 w-auto object-contain"
+      />
+      <div>
+        <span class="text-sm font-bold tracking-tight text-white block">Mafly</span>
+        <span class="text-[11px] font-mono text-slate-400">Software & Systems Engineering</span>
       </div>
     </div>
 
-    <!-- Center: Directory Navigation (4 cols on md) -->
-    <div class="md:col-span-4 space-y-3 font-mono text-xs">
-      <span class="text-[#ff8600] font-semibold text-[11px] tracking-wider uppercase block">Directory</span>
-      <div class="grid grid-cols-2 gap-2 text-slate-400">
-        <a href="/" class="hover:text-white transition-colors">/ Home</a>
-        <a href="#projects" class="hover:text-white transition-colors">/ Projects</a>
-        <a href="#techstack" class="hover:text-white transition-colors">/ TechStack</a>
-        <a href="#designs" class="hover:text-white transition-colors">/ Designs</a>
-        <a href="#contact" class="hover:text-white transition-colors">/ Contact</a>
-      </div>
-    </div>
+    <!-- Center: Navigation Anchors -->
+    <nav class="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs text-slate-400">
+      <a href="#projects" class="hover:text-white transition-colors">/ Projects</a>
+      <a href="#techstack" class="hover:text-white transition-colors">/ Tech Stack</a>
+      <a href="#designs" class="hover:text-white transition-colors">/ Designs</a>
+      <a href="#contact" class="hover:text-white transition-colors">/ Contact</a>
+    </nav>
 
-    <!-- Right: Connect & Source (3 cols on md) -->
-    <div class="md:col-span-3 space-y-3 font-mono text-xs">
-      <span class="text-[#ff8600] font-semibold text-[11px] tracking-wider uppercase block">Connect</span>
-      <div class="space-y-2 text-slate-400">
-        <a 
-          href="https://github.com/Nekoplii" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          class="flex items-center gap-2 hover:text-white transition-colors"
-        >
-          <GitBranch class="w-3.5 h-3.5 text-[#ff8600]" />
-          <span>github.com/Nekoplii</span>
-        </a>
-        <a 
-          href="mailto:code.mafly@gmail.com" 
-          class="block hover:text-white transition-colors"
-        >
-          code.mafly@gmail.com
-        </a>
-      </div>
+    <!-- Right: External Connect -->
+    <div class="flex items-center gap-4 font-mono text-xs">
+      <a 
+        href="https://github.com/Nekoplii" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="inline-flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors group"
+      >
+        <GitBranch class="w-3.5 h-3.5 text-[#ff8600]" />
+        <span>github.com/Nekoplii</span>
+        <ArrowUpRight class="w-3 h-3 text-slate-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+      </a>
     </div>
 
   </div>
 
-  <!-- Lower Tier: Copyright & Back to Top -->
-  <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[11px]">
+  <!-- Lower Row: Copyright, Tech Specs & Back to Top -->
+  <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[11px] text-slate-500">
     
-    <div class="flex items-center gap-3 text-slate-500">
+    <div class="flex items-center gap-3">
       <span>© 2026 Mafly. All rights reserved.</span>
-      <span class="hidden sm:inline text-slate-700">•</span>
-      <span class="hidden sm:inline text-slate-500">Astro v7 + TailwindCSS v4</span>
     </div>
 
     <div>
       <a 
         href="#hero" 
-        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-slate-300 hover:text-white transition-colors cursor-pointer"
+        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-slate-300 hover:text-white transition-colors cursor-pointer group"
       >
-        <span>Back to Top</span>
-        <ArrowUp class="w-3.5 h-3.5 text-[#ff8600]" />
+        <span>Back to top</span>
+        <ArrowUp class="w-3.5 h-3.5 text-[#ff8600] group-hover:-translate-y-0.5 transition-transform" />
       </a>
     </div>
 

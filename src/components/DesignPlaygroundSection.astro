@@ -71,7 +71,7 @@ const designStyles = [
   </div>
 
   <!-- Architectural Grid Line Matrix: Flush to max-w-7xl borders with 100% Solid GPU-Optimized Background -->
-  <div class="relative border-t border-white/10 w-full bg-[#0d0f15] shadow-2xl">
+  <div class="relative border-t border-white/10 w-full bg-[#0f121a] shadow-2xl">
     
     <!-- Outer Side Crosshairs '+' at the top of the grid -->
     <div class="absolute -top-2.5 -left-1.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-20 hidden sm:block">+</div>
@@ -98,7 +98,7 @@ const designStyles = [
         const colSpanClass = isLastItem ? 'sm:col-span-2 lg:col-span-3' : '';
 
         return (
-          <article class={`p-6 sm:p-8 flex flex-col justify-between group bg-[#10131e]/70 hover:bg-[#161a29]/95 transition-colors relative ${borderClasses} ${colSpanClass}`} style="contain: layout style paint; transform: translateZ(0);">
+          <article class={`p-6 sm:p-8 flex flex-col justify-between group bg-[#151923]/60 hover:bg-[#151923]/95 transition-colors relative ${borderClasses} ${colSpanClass}`} style="contain: layout style paint; transform: translateZ(0);">
             <div>
               <!-- Top Header (No Badges) -->
               <div class="flex items-center justify-between pb-3 mb-4 border-b border-white/10 font-mono text-xs">
@@ -115,27 +115,27 @@ const designStyles = [
               </p>
 
               <!-- Live Accurate Design Sample Box -->
-              <div class="mb-5 p-4 sm:p-5 rounded-2xl bg-[#090b14] border border-white/5 overflow-hidden">
+              <div class="mb-5 p-4 sm:p-5 rounded-2xl bg-[#0f121a] border border-white/5 overflow-hidden">
                 
                 {/* 1. Neumorphism Sample */}
                 {style.id === 'neumorphism' && (
-                  <div class="w-full p-4 rounded-2xl bg-[#141724] flex flex-col gap-4 select-none">
+                  <div class="w-full p-4 rounded-2xl bg-[#212633] flex flex-col gap-4 select-none">
                     <div class="flex items-center justify-between">
                       {/* Extruded Playback Knob */}
-                      <div class="w-11 h-11 rounded-full bg-[#141724] shadow-[5px_5px_12px_#080a11,-5px_-5px_12px_#202437] flex items-center justify-center text-slate-300 hover:text-[#ff8600] active:shadow-[inset_3px_3px_6px_#080a11,inset_-3px_-3px_6px_#202437] transition-all cursor-pointer">
+                      <div class="w-11 h-11 rounded-full bg-[#212633] shadow-[5px_5px_12px_#0f121a,-5px_-5px_12px_#2d3340] flex items-center justify-center text-slate-300 hover:text-[#ff8600] active:shadow-[inset_3px_3px_6px_#0f121a,inset_-3px_-3px_6px_#2d3340] transition-all cursor-pointer">
                         <Play class="w-4 h-4 fill-current ml-0.5" />
                       </div>
 
                       {/* Extruded Chip Indicator */}
-                      <div class="px-3.5 py-1.5 rounded-full bg-[#141724] shadow-[4px_4px_8px_#080a11,-4px_-4px_8px_#202437] text-[11px] font-mono text-slate-300 flex items-center gap-2">
+                      <div class="px-3.5 py-1.5 rounded-full bg-[#212633] shadow-[4px_4px_8px_#0f121a,-4px_-4px_8px_#2d3340] text-[11px] font-mono text-slate-300 flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-[#ff8600] shadow-[0_0_8px_#ff8600]"></span>
                         <span>Soft Surface</span>
                       </div>
                     </div>
 
                     {/* Debossed Slider Track with Extruded Thumb */}
-                    <div class="w-full h-8 rounded-full bg-[#141724] shadow-[inset_3px_3px_6px_#080a11,inset_-3px_-3px_6px_#202437] p-1 flex items-center relative">
-                      <div class="w-6 h-6 rounded-full bg-[#141724] shadow-[2px_2px_5px_#080a11,-2px_-2px_5px_#22273a] flex items-center justify-center ml-auto mr-0.5 cursor-pointer">
+                    <div class="w-full h-8 rounded-full bg-[#212633] shadow-[inset_3px_3px_6px_#0f121a,inset_-3px_-3px_6px_#2d3340] p-1 flex items-center relative">
+                      <div class="w-6 h-6 rounded-full bg-[#212633] shadow-[2px_2px_5px_#0f121a,-2px_-2px_5px_#2d3340] flex items-center justify-center ml-auto mr-0.5 cursor-pointer">
                         <div class="w-1.5 h-1.5 rounded-full bg-[#ff8600]"></div>
                       </div>
                     </div>
@@ -192,20 +192,20 @@ const designStyles = [
 
                 {/* 4. Flat Design Sample */}
                 {style.id === 'flat' && (
-                  <div class="w-full p-3.5 rounded-lg bg-[#141824] border border-[#232b40] shadow-none flex flex-col gap-2.5 select-none">
+                  <div class="w-full p-3.5 rounded-lg bg-[#151923] border border-[#2d3340] shadow-none flex flex-col gap-2.5 select-none">
                     <div class="h-1 bg-[#ff8600] w-full"></div>
                     
                     <div class="flex items-center justify-between">
                       <span class="text-xs font-bold text-white font-mono">SERVER_NODE//01</span>
-                      <span class="px-2 py-0.5 bg-[#232b40] text-slate-300 text-[10px] font-mono">ONLINE</span>
+                      <span class="px-2 py-0.5 bg-[#212633] text-slate-300 text-[10px] font-mono">ONLINE</span>
                     </div>
 
                     <div class="grid grid-cols-2 gap-2">
-                      <div class="p-2 bg-[#1a2030] border border-[#27314a]">
+                      <div class="p-2 bg-[#212633] border border-[#2d3340]">
                         <div class="text-[10px] font-mono text-slate-400">MEMORY</div>
                         <div class="text-xs font-bold text-white font-mono mt-0.5">3.4 / 8 GB</div>
                       </div>
-                      <div class="p-2 bg-[#1a2030] border border-[#27314a]">
+                      <div class="p-2 bg-[#212633] border border-[#2d3340]">
                         <div class="text-[10px] font-mono text-slate-400">CPU LOAD</div>
                         <div class="text-xs font-bold text-[#ff8600] font-mono mt-0.5">24.6%</div>
                       </div>
@@ -219,17 +219,17 @@ const designStyles = [
 
                 {/* 5. Claymorphism Sample */}
                 {style.id === 'claymorphism' && (
-                  <div class="w-full p-4 rounded-3xl bg-[#1e243a] shadow-[0_16px_32px_rgba(0,0,0,0.5),inset_5px_5px_10px_rgba(255,255,255,0.18),inset_-5px_-5px_10px_rgba(0,0,0,0.6)] flex flex-col gap-3 select-none">
+                  <div class="w-full p-4 rounded-3xl bg-[#212633] shadow-[0_16px_32px_rgba(0,0,0,0.5),inset_5px_5px_10px_rgba(255,255,255,0.18),inset_-5px_-5px_10px_rgba(0,0,0,0.6)] flex flex-col gap-3 select-none">
                     <div class="flex items-center justify-between">
                       <div class="w-10 h-10 rounded-2xl bg-[#ff8600] shadow-[0_8px_16px_rgba(255,134,0,0.35),inset_3px_3px_6px_rgba(255,255,255,0.5),inset_-3px_-3px_6px_rgba(0,0,0,0.4)] flex items-center justify-center text-black font-black">
                         <Zap class="w-5 h-5 fill-current" />
                       </div>
-                      <div class="px-3 py-1 rounded-full bg-[#293252] shadow-[0_6px_12px_rgba(0,0,0,0.3),inset_3px_3px_6px_rgba(255,255,255,0.18),inset_-3px_-3px_6px_rgba(0,0,0,0.5)] text-[10px] font-bold text-[#ff8600]">
+                      <div class="px-3 py-1 rounded-full bg-[#2d3340] shadow-[0_6px_12px_rgba(0,0,0,0.3),inset_3px_3px_6px_rgba(255,255,255,0.18),inset_-3px_-3px_6px_rgba(0,0,0,0.5)] text-[10px] font-bold text-[#ff8600]">
                         3D INFLATED
                       </div>
                     </div>
 
-                    <div class="w-full py-2 rounded-2xl bg-[#2d3659] shadow-[0_10px_20px_rgba(0,0,0,0.35),inset_4px_4px_8px_rgba(255,255,255,0.15),inset_-4px_-4px_8px_rgba(0,0,0,0.5)] flex items-center justify-between px-3.5 text-xs font-bold text-white">
+                    <div class="w-full py-2 rounded-2xl bg-[#2d3340] shadow-[0_10px_20px_rgba(0,0,0,0.35),inset_4px_4px_8px_rgba(255,255,255,0.15),inset_-4px_-4px_8px_rgba(0,0,0,0.5)] flex items-center justify-between px-3.5 text-xs font-bold text-white">
                       <span class="text-slate-200">Volume Level</span>
                       <span class="px-2 py-0.5 rounded-lg bg-[#ff8600] text-black text-[10px] font-black shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4),inset_-1px_-1px_2px_rgba(0,0,0,0.3)]">85%</span>
                     </div>
@@ -238,7 +238,7 @@ const designStyles = [
 
                 {/* 6. Gridlines Sample - Clean, Connected Edge-to-Edge Architectural Grid */}
                 {style.id === 'gridlines' && (
-                  <div class="relative border border-white/20 bg-[#0a0d18] font-mono select-none rounded-lg overflow-hidden">
+                  <div class="relative border border-white/20 bg-[#0f121a] font-mono select-none rounded-lg overflow-hidden">
                     {/* Outer Corner Crosshairs '+' */}
                     <div class="absolute top-1 left-1.5 font-mono text-[10px] text-[#ff8600] z-20 pointer-events-none select-none">+</div>
                     <div class="absolute top-1 right-1.5 font-mono text-[10px] text-[#ff8600] z-20 pointer-events-none select-none">+</div>

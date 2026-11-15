@@ -48,7 +48,7 @@ const projects = [
   </div>
 
   <!-- Connected Architectural Grid Line Matrix -->
-  <div class="relative rounded-2xl border border-white/10 bg-[#0d0f15] overflow-hidden shadow-2xl">
+  <div class="relative rounded-2xl border border-white/10 bg-[#0f121a] overflow-hidden shadow-2xl">
     
     <!-- Outer Corner Crosshairs '+' -->
     <div class="absolute top-2 left-2.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-10">+</div>
@@ -71,7 +71,7 @@ const projects = [
           <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
             <div>
               <!-- Framed Image or Title-based Thumbnail Fallback -->
-              <div class="relative w-full aspect-[16/10] rounded-xl overflow-hidden mb-6 bg-[#131622] border border-white/10 group-hover:border-[#ff8600]/30 transition-all flex items-center justify-center">
+              <div class="relative w-full aspect-[16/10] rounded-xl overflow-hidden mb-6 bg-[#151923] border border-white/10 group-hover:border-[#ff8600]/30 transition-all flex items-center justify-center">
                 {project.image && project.image.trim() !== '' ? (
                   <div class="w-full h-full relative flex items-center justify-center">
                     <img 
@@ -81,14 +81,14 @@ const projects = [
                       loading="lazy"
                       onerror="this.style.display='none'; if(this.nextElementSibling) { this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex'); }"
                     />
-                    <div class="hidden absolute inset-0 bg-[#131622] items-center justify-center p-6 text-center select-none">
+                    <div class="hidden absolute inset-0 bg-[#151923] items-center justify-center p-6 text-center select-none">
                       <span class="text-lg sm:text-xl font-bold text-slate-200 group-hover:text-[#ff8600] transition-colors tracking-tight line-clamp-2 px-4">
                         {project.title}
                       </span>
                     </div>
                   </div>
                 ) : (
-                  <div class="w-full h-full bg-[#131622] flex items-center justify-center p-6 text-center select-none">
+                  <div class="w-full h-full bg-[#151923] flex items-center justify-center p-6 text-center select-none">
                     <span class="text-lg sm:text-xl font-bold text-slate-200 group-hover:text-[#ff8600] transition-colors tracking-tight line-clamp-2 px-4">
                       {project.title}
                     </span>
