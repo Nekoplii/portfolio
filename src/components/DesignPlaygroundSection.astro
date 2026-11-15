@@ -1,6 +1,6 @@
 ---
 // DesignPlaygroundSection.astro - 7 Core Design Paradigms with Accurate Live UI Samples
-import { Sparkles, Play, Zap } from 'lucide-astro';
+import { Play, Sparkles, Zap } from 'lucide-astro';
 
 const designStyles = [
   {
@@ -44,13 +44,6 @@ const designStyles = [
     title: 'Gridlines',
     subtitle: 'Blueprint matrix, orthogonal dividers & spatial ticks',
     description: 'Transparent structural layout systems with visible orthogonal dividing lines, monospace telemetry indices, coordinate markings, and crosshair (+) intersection points.'
-  },
-  {
-    id: 'bento-grid',
-    index: '07',
-    title: 'Bento Grid',
-    subtitle: 'Asymmetric modular card hierarchy & dense information architecture',
-    description: 'Compartmentalized responsive multi-tile layouts inspired by Japanese bento boxes. Distributes heterogeneous metrics, charts, tools, and actions into harmonious, highly readable tiles with varying aspect ratios.'
   }
 ];
 ---
@@ -273,75 +266,6 @@ const designStyles = [
                         Y: 088
                       </div>
                     </div>
-                  </div>
-                )}
-
-                {/* 7. Bento Grid Sample - Simplified, Clean Asymmetric Modular Tiles */}
-                {style.id === 'bento-grid' && (
-                  <div class="w-full grid grid-cols-1 sm:grid-cols-3 gap-3 select-none">
-                    
-                    {/* Tile 1: Latency / Sparkline (2 cols) */}
-                    <div class="sm:col-span-2 p-4 rounded-xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
-                      <div class="flex items-center justify-between text-xs font-mono text-slate-400">
-                        <span>THROUGHPUT // EDGE</span>
-                        <span class="inline-flex items-center gap-1.5 text-emerald-400 text-[11px]">
-                          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                          Live 8.4ms
-                        </span>
-                      </div>
-                      
-                      <div class="my-2.5">
-                        <svg viewBox="0 0 240 28" class="w-full h-7 stroke-[#ff8600] fill-none stroke-[2]" preserveAspectRatio="none">
-                          <path d="M0,18 Q40,4 80,16 T160,8 T240,14" />
-                          <path d="M0,18 Q40,4 80,16 T160,8 T240,14 L240,28 L0,28 Z" class="fill-[#ff8600]/10 stroke-none" />
-                        </svg>
-                      </div>
-
-                      <div class="text-[11px] font-mono text-slate-500 flex justify-between">
-                        <span>Sub-second LCP</span>
-                        <span>Global Sync</span>
-                      </div>
-                    </div>
-
-                    {/* Tile 2: Edge CDN (1 col) */}
-                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
-                      <span class="text-xs font-mono text-slate-400">GLOBAL CDN</span>
-                      <div class="my-1.5">
-                        <div class="text-2xl font-bold font-mono text-white">32<span class="text-xs text-[#ff8600] font-normal ml-1">PoPs</span></div>
-                        <span class="text-[11px] font-mono text-slate-400">Distributed</span>
-                      </div>
-                      <span class="text-[10px] font-mono text-emerald-400">99.99% Up</span>
-                    </div>
-
-                    {/* Tile 3: Lighthouse (1 col) */}
-                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
-                      <span class="text-xs font-mono text-slate-400">LIGHTHOUSE</span>
-                      <div class="my-1.5">
-                        <div class="text-2xl font-bold font-mono text-white">100<span class="text-xs text-slate-500 font-normal">/100</span></div>
-                        <span class="text-[11px] font-mono text-emerald-400">Optimal Audit</span>
-                      </div>
-                      <span class="text-[10px] font-mono text-slate-500">Zero CLS</span>
-                    </div>
-
-                    {/* Tile 4: Modular Tech Stack (2 cols) */}
-                    <div class="sm:col-span-2 p-4 rounded-xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
-                      <div class="flex items-center justify-between text-xs font-mono text-slate-400">
-                        <span>MODULAR ISLANDS</span>
-                        <span class="text-[10px] font-mono text-slate-500">0kb JS Default</span>
-                      </div>
-
-                      <div class="flex flex-wrap gap-2 my-2.5">
-                        <span class="px-2.5 py-1 rounded-md bg-white/[0.06] border border-white/10 text-white font-mono text-xs">Astro 7</span>
-                        <span class="px-2.5 py-1 rounded-md bg-white/[0.06] border border-white/10 text-white font-mono text-xs">Tailwind v4</span>
-                        <span class="px-2.5 py-1 rounded-md bg-[#ff8600]/15 border border-[#ff8600]/30 text-[#ff8600] font-mono text-xs">Three.js</span>
-                      </div>
-
-                      <div class="text-[11px] font-mono text-slate-500 flex justify-between">
-                        <span>Island Architecture</span>
-                        <span class="text-slate-400">Edge SSR</span>
-                      </div>
-                    </div>
-
                   </div>
                 )}
 
