@@ -1,13 +1,31 @@
 ---
 // SidebarDrawer.astro - Architectural Grid Slide-Over Drawer
-import { ArrowUpRight, GitBranch, Mail, X } from 'lucide-astro';
+import { X, ArrowUpRight, GitBranch, Mail } from 'lucide-astro';
+
+const pathname = Astro.url.pathname;
 
 const navItems = [
-  { index: '01', name: 'Home', href: '/', desc: 'Overview, systems engineering & 3D grid' },
-  { index: '02', name: 'Projects', href: '#projects', desc: 'Open-source software, desktop & web apps' },
-  { index: '03', name: 'Tech Stack', href: '#techstack', desc: 'Languages, runtimes & system tools' },
-  { index: '04', name: 'Designs', href: '#designs', desc: 'Architectural visual paradigms & UI systems' },
-  { index: '05', name: 'Contact', href: '#contact', desc: 'Direct inquiries & communication channel' },
+  { 
+    index: '01', 
+    name: 'Home', 
+    href: '/', 
+    desc: 'Overview, systems engineering & 3D grid showcase',
+    active: pathname === '/' || pathname === ''
+  },
+  { 
+    index: '02', 
+    name: 'Projects', 
+    href: '/projects', 
+    desc: 'Open-source software, desktop & web platforms',
+    active: pathname.startsWith('/projects')
+  },
+  { 
+    index: '03', 
+    name: 'Workflows', 
+    href: '/workflows', 
+    desc: 'Systematic lifecycle, engineering methodology & delivery',
+    active: pathname.startsWith('/workflows')
+  },
 ];
 ---
 
@@ -42,6 +60,7 @@ const navItems = [
           />
           <div>
             <span class="text-sm font-bold text-white tracking-tight block">Mafly</span>
+            <span class="text-[11px] font-mono text-slate-400">Software & Systems</span>
           </div>
         </div>
 
@@ -61,17 +80,23 @@ const navItems = [
         <span class="text-slate-400">DIRECTORY</span>
       </div>
 
-      <!-- Navigation Links: Contiguous Divided List -->
+      <!-- Navigation Links: Exactly Home, Projects, and Workflows -->
       <nav class="divide-y divide-white/10 border-b border-white/10">
         {navItems.map((item) => (
           <a 
             href={item.href}
-            class="sidebar-nav-link group px-6 py-4 flex items-center justify-between hover:bg-white/[0.02] transition-colors"
+            class={`sidebar-nav-link group px-6 py-4 flex items-center justify-between transition-colors ${
+              item.active 
+                ? 'bg-white/[0.04] border-l-2 border-l-[#ff8600]' 
+                : 'hover:bg-white/[0.02]'
+            }`}
           >
             <div class="flex items-center gap-4">
-              <span class="text-xs font-mono text-[#ff8600] group-hover:text-[#ffa033] transition-colors">{item.index} //</span>
+              <span class={`text-xs font-mono transition-colors ${item.active ? 'text-[#ff8600] font-bold' : 'text-[#ff8600]'}`}>
+                {item.index} //
+              </span>
               <div>
-                <span class="text-sm font-semibold text-white group-hover:text-[#ff8600] transition-colors block">
+                <span class={`text-sm font-semibold transition-colors block ${item.active ? 'text-[#ff8600]' : 'text-white group-hover:text-[#ff8600]'}`}>
                   {item.name}
                 </span>
                 <span class="text-xs text-slate-400 block line-clamp-1">
@@ -79,10 +104,22 @@ const navItems = [
                 </span>
               </div>
             </div>
-            <ArrowUpRight class="w-4 h-4 text-slate-500 group-hover:text-[#ff8600] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 ml-2" />
+            <ArrowUpRight class={`w-4 h-4 transition-all shrink-0 ml-2 ${
+              item.active 
+                ? 'text-[#ff8600]' 
+                : 'text-slate-500 group-hover:text-[#ff8600] group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
+            }`} />
           </a>
         ))}
       </nav>
+
+      <!-- Status Badge -->
+      <div class="p-6">
+        <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/10 flex items-center gap-2.5 font-mono text-xs text-slate-300">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+          <span>Available for projects & systems consulting</span>
+        </div>
+      </div>
     </div>
 
     <!-- Drawer Footer -->

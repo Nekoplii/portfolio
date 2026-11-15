@@ -26,10 +26,10 @@ import { ArrowUp, ArrowUpRight, GitBranch } from 'lucide-astro';
 
     <!-- Center: Navigation Anchors -->
     <nav class="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs text-slate-400">
-      <a href="#projects" class="hover:text-white transition-colors">/ Projects</a>
-      <a href="#techstack" class="hover:text-white transition-colors">/ Tech Stack</a>
-      <a href="#designs" class="hover:text-white transition-colors">/ Designs</a>
-      <a href="#contact" class="hover:text-white transition-colors">/ Contact</a>
+      <a href="/" class="hover:text-white transition-colors">/ Home</a>
+      <a href="/projects" class="hover:text-white transition-colors">/ Projects</a>
+      <a href="/workflows" class="hover:text-white transition-colors">/ Workflows</a>
+      <a href="/#contact" class="hover:text-white transition-colors">/ Contact</a>
     </nav>
 
     <!-- Right: External Connect -->
@@ -57,7 +57,8 @@ import { ArrowUp, ArrowUpRight, GitBranch } from 'lucide-astro';
 
     <div>
       <a 
-        href="#hero" 
+        href="#top" 
+        id="footer-back-to-top"
         class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-slate-300 hover:text-white transition-colors cursor-pointer group"
       >
         <span>Back to top</span>
@@ -67,3 +68,17 @@ import { ArrowUp, ArrowUpRight, GitBranch } from 'lucide-astro';
 
   </div>
 </footer>
+
+<script>
+  const backToTopBtn = document.getElementById('footer-back-to-top');
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if ((window as any).lenis) {
+        (window as any).lenis.scrollTo(0, { duration: 1.2 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
+</script>
