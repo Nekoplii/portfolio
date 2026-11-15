@@ -1,0 +1,189 @@
+---
+// src/pages/workflows.astro - Independent Workflows Page with Elevated Stepper
+import Layout from '../layouts/Layout.astro';
+import { Mail, ArrowUpRight, Copy } from 'lucide-astro';
+
+const steps = [
+  {
+    number: '01',
+    title: 'Architecture & Planning',
+    description: 'Mapping data structures, system flows, and selecting appropriate technologies to ensure a resilient and scalable foundation.'
+  },
+  {
+    number: '02',
+    title: 'Environment Setup',
+    description: 'Configuring base infrastructure and containerization to maintain consistency from development through production.'
+  },
+  {
+    number: '03',
+    title: 'Core Engineering',
+    description: 'Building core logic, APIs, and backend systems with clean, modular, and efficient architectural standards.'
+  },
+  {
+    number: '04',
+    title: 'Interface Crafting',
+    description: 'Translating systems into responsive, interactive interfaces (UI/UX), balancing modern design with high performance.'
+  },
+  {
+    number: '05',
+    title: 'Testing & Optimization',
+    description: 'Conducting thorough testing, performance profiling, and code refinement to ensure stability under real-world workloads.'
+  },
+  {
+    number: '06',
+    title: 'Packaging & Deployment',
+    description: 'Automating CI/CD pipelines for builds, binary distribution, and structured releases to production servers.'
+  }
+];
+---
+
+<Layout 
+  title="Workflows • Mafly"
+  description="A structured 6-step engineering approach from initial planning to production deployment by Mafly."
+>
+  <!-- Generous top spacing to prevent header obstruction -->
+  <div class="pt-44 sm:pt-52 pb-24 sm:pb-32">
+    
+    <!-- Centered Page Header with ample breathing room -->
+    <div class="text-center max-w-2xl mx-auto mb-16 sm:mb-20">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ff8600]/10 border border-[#ff8600]/25 text-xs font-mono text-[#ff8600] mb-4">
+        <span>02 // WORKFLOW</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.15]">
+        Development <span class="bg-gradient-to-r from-[#ff8600] to-[#ffa033] bg-clip-text text-transparent">Workflow</span>
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base mt-3 leading-relaxed">
+        A structured 6-step engineering approach from initial planning to production deployment.
+      </p>
+    </div>
+
+    <!-- Stepper Pipeline: Clean, open layout directly on page canvas (No outer wrapper card) -->
+    <div class="max-w-4xl mx-auto space-y-6 sm:space-y-8 mb-24 sm:mb-32 relative">
+      {steps.map((step, idx) => {
+        const isLast = idx === steps.length - 1;
+
+        return (
+          <div class="relative flex items-start gap-4 sm:gap-7 group">
+            
+            <!-- Continuous vertical line connecting this node directly to the next node -->
+            {!isLast && (
+              <div class="absolute left-5 sm:left-6 top-10 sm:top-12 bottom-[-24px] sm:bottom-[-32px] w-0.5 -translate-x-1/2 bg-gradient-to-b from-[#ff8600]/80 via-white/10 to-[#ff8600]/30 group-hover:from-[#ff8600] group-hover:to-[#ff8600] transition-colors z-0"></div>
+            )}
+
+            <!-- Stepper Node Badge -->
+            <div class="relative z-10 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#0f121a] border-2 border-white/15 group-hover:border-[#ff8600] group-hover:shadow-[0_0_20px_rgba(255,134,0,0.35)] text-slate-200 group-hover:text-[#ff8600] font-mono font-bold text-xs sm:text-sm transition-all shrink-0 select-none">
+              {step.number}
+            </div>
+
+            <!-- Step Card (Direct on canvas, no outer box) -->
+            <div class="flex-1 relative rounded-2xl border border-white/10 bg-[#0f121a]/95 backdrop-blur-sm p-6 sm:p-8 group-hover:border-[#ff8600]/40 group-hover:bg-[#151923]/95 transition-all shadow-xl shadow-black/40 overflow-hidden">
+              <!-- Corner Crosshairs '+' -->
+              <div class="absolute top-2 left-2.5 font-mono text-[10px] text-white/20 select-none pointer-events-none">+</div>
+              <div class="absolute top-2 right-2.5 font-mono text-[10px] text-white/20 select-none pointer-events-none">+</div>
+
+              <div class="flex items-center pb-3 mb-3 border-b border-white/5 font-mono text-xs">
+                <span class="text-[#ff8600] font-semibold">STEP {idx + 1} OF 6 //</span>
+              </div>
+
+              <h2 class="text-lg sm:text-xl font-bold text-white group-hover:text-[#ff8600] transition-colors tracking-tight mb-2">
+                {step.title}
+              </h2>
+
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                {step.description}
+              </p>
+            </div>
+
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- Connected Architectural Grid Line Matrix Card: Open for Collaboration (Aligned to max-w-4xl) -->
+    <div class="max-w-4xl mx-auto relative rounded-2xl border border-white/10 bg-[#0f121a] overflow-hidden shadow-2xl">
+      
+      <!-- Outer Corner Crosshairs '+' -->
+      <div class="absolute top-2 left-2.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-10">+</div>
+      <div class="absolute top-2 right-2.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-10">+</div>
+      <div class="absolute bottom-2 left-2.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-10">+</div>
+      <div class="absolute bottom-2 right-2.5 font-mono text-[11px] text-white/30 pointer-events-none select-none z-10">+</div>
+
+      <!-- Top Meta Bar -->
+      <div class="w-full px-6 sm:px-8 py-3.5 border-b border-white/10 flex items-center justify-between font-mono text-xs">
+        <span class="text-[#ff8600] font-semibold">02 //</span>
+        <span class="text-slate-400">OPEN FOR COLLABORATION</span>
+      </div>
+
+      <!-- Content Columns: Left Info & Right Direct Email Action -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-white/10">
+        
+        <!-- Left Column: Context & Availability -->
+        <div class="lg:col-span-7 p-6 sm:p-10 flex flex-col justify-center space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-xs w-fit">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Available for new projects</span>
+          </div>
+
+          <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            Have an idea or project in mind?
+          </h3>
+          
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-lg">
+            Feel free to reach out directly. I'm always open to discussing new opportunities, systems architecture, or engineering collaborations.
+          </p>
+        </div>
+
+        <!-- Right Column: Direct Email & Action -->
+        <div class="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-center gap-4 bg-white/[0.01]">
+          <!-- Direct Email Box with 1-click Copy -->
+          <div class="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-white/[0.03] border border-white/10">
+            <span class="text-xs sm:text-sm font-mono text-slate-200 select-all truncate">
+              code.mafly@gmail.com
+            </span>
+            <button 
+              id="copy-email-btn"
+              type="button"
+              aria-label="Copy email address"
+              class="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 transition-all cursor-pointer font-mono shrink-0 active:scale-95"
+            >
+              <Copy class="w-3.5 h-3.5" />
+              <span id="copy-btn-text">Copy</span>
+            </button>
+          </div>
+
+          <!-- Direct mailto Action Button -->
+          <a 
+            href="mailto:code.mafly@gmail.com" 
+            class="w-full py-3.5 px-6 rounded-xl font-semibold text-black bg-[#ff8600] hover:bg-[#ff9c2b] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#ff8600]/20 active:scale-[0.99] text-sm group"
+          >
+            <Mail class="w-4 h-4" />
+            <span>Send an Email</span>
+            <ArrowUpRight class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</Layout>
+
+<script>
+  const copyBtn = document.getElementById('copy-email-btn');
+  const copyText = document.getElementById('copy-btn-text');
+
+  if (copyBtn && copyText) {
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText('code.mafly@gmail.com');
+        copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          copyText.textContent = 'Copy';
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy email:', err);
+      }
+    });
+  }
+</script>

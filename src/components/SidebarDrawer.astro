@@ -1,6 +1,6 @@
 ---
 // SidebarDrawer.astro - Architectural Grid Slide-Over Drawer
-import { X, ArrowUpRight, GitBranch, Mail } from 'lucide-astro';
+import { ArrowUpRight, GitBranch, Mail, X } from 'lucide-astro';
 
 const pathname = Astro.url.pathname;
 
@@ -60,7 +60,6 @@ const navItems = [
           />
           <div>
             <span class="text-sm font-bold text-white tracking-tight block">Mafly</span>
-            <span class="text-[11px] font-mono text-slate-400">Software & Systems</span>
           </div>
         </div>
 
@@ -112,14 +111,6 @@ const navItems = [
           </a>
         ))}
       </nav>
-
-      <!-- Status Badge -->
-      <div class="p-6">
-        <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/10 flex items-center gap-2.5 font-mono text-xs text-slate-300">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
-          <span>Available for projects & systems consulting</span>
-        </div>
-      </div>
     </div>
 
     <!-- Drawer Footer -->
