@@ -9,12 +9,16 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 
 const { 
-  title = "Mafly • Systems, Web & Backend Engineering",
-  description = "Developing systems for web, desktop, and servers. Open-source development, web platforms, and system administration." 
+  title = "Mafly | Architecting Software Ecosystems",
+  description = "Architecting interconnected web tools, high-performance hosting infrastructure, and developer ecosystems by Mafly.",
+  image = "https://media.mafly.my.id/logo/primary.png"
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://mafly.my.id');
 ---
 
 <!doctype html>
@@ -26,17 +30,32 @@ const {
     <link rel="alternate icon" type="image/png" href="https://media.mafly.my.id/logo/primary.png" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- SEO Meta Tags -->
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Primary Meta Tags -->
     <title>{title}</title>
+    <meta name="title" content={title} />
     <meta name="description" content={description} />
+    <meta name="author" content="Mafly" />
+    <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#ff8600" />
 
     <!-- OpenGraph / Social Meta -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mafly" />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="https://media.mafly.my.id/logo/primary.png" />
+    <meta property="og:image" content={image} />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
 
     <!-- Preconnect Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
